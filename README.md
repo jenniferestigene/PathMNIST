@@ -104,13 +104,14 @@ pathmnist/
 │   └── correct_debris.png
 ├── README.md
 ├── classification_report.txt
-├── dataset.py                          # raw images -> .npy tensors + class_distribution.png
+├── dataset.py                          # raw images -> .npy tensors + 
 ├── evaluate.py                         # evaluation + per-class metrics + confusion matrix
+class_distribution.png
 ├── model.py                            # CNN architecture (nn.Module)
 ├── requirements.txt
+├── results.md                          # training curves, metrics, full experiment log
 ├── train.py                            # training loop, weighted loss, LR scheduler, checkpointing, writes training_log.csv
 ├── training_log.csv                    # metrics from the reported run
-├── results.md                          # training curves, metrics, full experiment log
-├── visualize_training.py               # builds training_curves.png from the log
 └── visualize_misclassifications.py     # side-by-side comparison grids for a given confusion pair
+├── visualize_training.py               # builds training_curves.png from the log
 ```
