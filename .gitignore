@@ -220,3 +220,4 @@ __marimo__/
 venv/
 *.npy
 saved_model.pth
+final_model.pth
