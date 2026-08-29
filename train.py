@@ -125,6 +125,7 @@ def train():
     # Logging
     log_rows = []
     num_epochs = 20
+    best_val_loss = float("inf")
 
     for epoch in range(1, num_epochs +1):
         # Training
@@ -168,6 +169,12 @@ def train():
         val_loss /= val_total
         val_acc = val_correct / val_total
 
+        # Save a checkpoint whenever validation loss improves
+        if val_loss < best_val_loss:
+            best_val_loss = val_loss
+            torch.save(model.state_dict(), "saved_model.pth")
+            print(f"  -> New best val_loss: {val_loss:.4f}, saved to saved_model.pth")
+
         # Step the scheduler
         scheduler.step(val_loss)
 
@@ -199,7 +206,7 @@ def train():
     print("Saved training_log.csv")
 
     torch.save(model.state_dict(), "saved_model.pth")
-    print("Saved saved_model.pth")
+    print("Saved saved_model.pth (last epoch, for reference/overfitting comparison)")
 
 
 if __name__ == "__main__":
