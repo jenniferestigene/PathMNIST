@@ -127,4 +127,13 @@ def visualize_confusion(true_class: str, pred_class: str, n: int = 8):
 if __name__ == "__main__":
     # The dominant confusion pair from the confusion matrix: 502 of 1,338
     # adipose test images (37.5%) were predicted as smooth muscle.
+    visualize_confusion(true_class="adipose", pred_class="smooth muscle", n=8)
+
+    # New dominant confusion pair, per the updated confusion matrix:
+    # 111 of 421 cancer-associated stroma test images (26.4%) were
+    # predicted as debris, and debris more broadly absorbs stray
+    # misclassifications from several other classes (smooth muscle,
+    # mucus, normal colon mucosa, colorectal adenocarcinoma epithelium),
+    # suggesting debris may be acting as a "catch-all" class rather than
+    # a clean visual confusion with one specific pair.
     visualize_confusion(true_class="cancer-associated stroma", pred_class="debris", n=8)
