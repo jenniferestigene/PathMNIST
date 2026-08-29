@@ -94,7 +94,7 @@ def compute_class_weights(labels: np.ndarray, num_classes: int = 9) -> torch.Ten
 
 def train():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Using ddevice: {device}")
+    print(f"Using device: {device}")
 
     # Datasets and loaders
     train_dataset = PathMNISTDataset(
@@ -117,14 +117,14 @@ def train():
     criterion = nn.CrossEntropyLoss(weight=class_weights)
 
     # Adam optimizer
-    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    optimizer = optim.Adam(model.parameters(), lr=0.0005)
 
     # LR Scheduler
     scheduler = ReduceLROnPlateau(optimizer, mode="min", factor=0.1, patience=3)
 
     # Logging
     log_rows = []
-    num_epochs = 20
+    num_epochs = 40
     best_val_loss = float("inf")
 
     for epoch in range(1, num_epochs +1):
@@ -183,7 +183,7 @@ def train():
 
         print(f"Epoch {epoch:2d}/{num_epochs} | "
               f"train_loss: {train_loss:.4f} train_acc: {train_acc:.4f} | "
-              f"val_loss: {val_loss:.4f} val_acc: {val_acc}:.4f | "
+              f"val_loss: {val_loss:.4f} val_acc: {val_acc:.4f} | "
               f"lr: {current_lr:.6f}")
 
         log_rows.append({
@@ -205,8 +205,8 @@ def train():
 
     print("Saved training_log.csv")
 
-    torch.save(model.state_dict(), "saved_model.pth")
-    print("Saved saved_model.pth (last epoch, for reference/overfitting comparison)")
+    torch.save(model.state_dict(), "final_model.pth")
+    print("Saved final_model.pth (last epoch, for reference/overfitting comparison)")
 
 
 if __name__ == "__main__":
